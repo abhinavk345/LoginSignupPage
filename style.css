@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(#02010a, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.scene {
+  perspective: 1200px;
+}
+
+.card {
+  width: 800px;
+  height: 420px;
+  display: flex;
+  transform: rotateX(8deg) rotateY(-12deg);
+  border: 2px solid #39f6ff;
+  box-shadow: 0 0 40px #39f6ff;
+  transition: 0.8s ease;
+  overflow: hidden;
+}
+
+/* PANELS */
+.panel {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* LEFT BACKGROUND PANEL */
+.panel-left {
+  width: 45%;
+  background: linear-gradient(135deg, #0bbcd6, #073b44);
+  transform: skewX(-12deg);
+  transition: 0.8s ease;
+}
+
+.panel-left h1 {
+  transform: skewX(12deg);
+  padding: 20px;
+  text-align: center;
+}
+
+/* RIGHT FORM PANEL */
+.panel-right {
+  width: 55%;
+  background: #050505;
+  padding: 40px;
+  position: relative;
+}
+
+/* FORMS */
+.form {
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form.active {
+  display: flex;
+}
+
+.form h2 {
+  margin-bottom: 10px;
+}
+
+.form input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #39f6ff;
+  padding: 10px;
+  color: white;
+}
+
+.form button {
+  margin-top: 10px;
+  padding: 12px;
+  background: linear-gradient(#3ff, #08b);
+  border: none;
+  color: black;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.form p {
+  font-size: 14px;
+  text-align: center;
+}
+
+.form span {
+  color: #39f6ff;
+  cursor: pointer;
+}
+
+/* REGISTER STATE */
+.card.register-active {
+  transform: rotateX(8deg) rotateY(12deg);
+}
+
+.card.register-active .panel-left {
+  transform: translateX(100%) skewX(-12deg);
+}

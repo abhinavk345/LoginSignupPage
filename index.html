@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login / Register UI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="scene">
+  <div class="card" id="card">
+
+    <!-- LEFT PANEL -->
+    <div class="panel panel-left">
+      <h1 id="leftText">WELCOME BACK!</h1>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="panel panel-right">
+
+      <!-- LOGIN -->
+      <form class="form login active">
+        <h2>Login</h2>
+        <input type="text" placeholder="Username" />
+        <input type="password" placeholder="Password" />
+        <button>Login</button>
+        <p>Don't have an account? <span id="toRegister">Sign Up</span></p>
+      </form>
+
+      <!-- REGISTER -->
+      <form class="form register">
+        <h2>Register</h2>
+        <input type="text" placeholder="Username" />
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <button>Register</button>
+        <p>Already have an account? <span id="toLogin">Sign In</span></p>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
