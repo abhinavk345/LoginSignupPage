@@ -8,6 +8,7 @@
 * {
   box-sizing: border-box;
   font-family: "Segoe UI", Arial, sans-serif;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 body {
@@ -21,41 +22,36 @@ body {
   overflow: hidden;
 }
 
-/* BACKGROUND GLOW */
+/* BACKGROUND */
 body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, #00eaff22, #004e9222, #00eaff22);
-  animation: bgMove 12s linear infinite;
+  background: linear-gradient(120deg, #00eaff11, #004e9222, #00eaff11);
+  animation: bgMove 18s ease-in-out infinite alternate;
   z-index: -1;
 }
 
 @keyframes bgMove {
-  from { background-position: 0% 50%; }
-  to   { background-position: 100% 50%; }
+  from { transform: translateX(-5%); }
+  to   { transform: translateX(5%); }
 }
 
 /* SCENE */
-.scene {
-  perspective: 1400px;
-}
+.scene { perspective: 1600px; }
 
-/* FLIP CARD */
+/* CARD */
 .card {
   width: 820px;
   height: 440px;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 1s cubic-bezier(.4,.2,.2,1);
+  transition: transform 1.2s cubic-bezier(.22,1,.36,1);
 }
 
-/* FLIPPED STATE */
-.card.flipped {
-  transform: rotateY(180deg);
-}
+.card.flipped { transform: rotateY(180deg); }
 
-/* CARD SIDES */
+/* SIDES */
 .side {
   position: absolute;
   inset: 0;
@@ -63,11 +59,13 @@ body::before {
   backface-visibility: hidden;
   border-radius: 18px;
   overflow: hidden;
-  border: 2px solid #39f6ff;
-  box-shadow: 0 0 60px #39f6ff55;
+  border: 1.5px solid #39f6ff88;
+  box-shadow: 0 0 80px #39f6ff33;
 }
 
-/* LEFT PANEL */
+.back { transform: rotateY(180deg); }
+
+/* PANELS */
 .panel-left {
   width: 45%;
   background: linear-gradient(135deg, #0bbcd6, #042a33);
@@ -78,89 +76,134 @@ body::before {
 }
 
 .panel-left h1 {
-  text-align: center;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
-/* RIGHT PANEL */
 .panel-right {
   width: 55%;
-  background: rgba(5,5,5,0.9);
+  background: rgba(5,5,5,0.92);
   padding: 40px;
   display: flex;
   align-items: center;
 }
 
-/* BACK SIDE */
-.back {
-  transform: rotateY(180deg);
-}
-
-/* FORMS */
+/* FORM */
 form {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  animation: fadeIn 0.6s ease;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-form h2 {
-  margin-bottom: 10px;
-}
-
-/* INPUTS */
+/* INPUT */
 input {
   background: transparent;
   border: none;
-  border-bottom: 2px solid #39f6ff66;
+  border-bottom: 2px solid #39f6ff44;
   padding: 12px;
   color: white;
   outline: none;
-  transition: 0.3s;
 }
 
 input:focus {
   border-bottom-color: #39f6ff;
-  box-shadow: 0 6px 18px #39f6ff55;
 }
 
 /* BUTTON */
 button {
-  margin-top: 10px;
   padding: 14px;
   background: linear-gradient(135deg, #3ff, #08b);
   border: none;
   border-radius: 30px;
   cursor: pointer;
   font-weight: bold;
-  transition: 0.3s ease;
 }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px #39f6ff88;
-}
-
-/* TEXT */
-p {
+/* BOTTOM ROW */
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 14px;
-  text-align: center;
 }
 
-span {
+.form-footer span {
   color: #39f6ff;
   cursor: pointer;
   font-weight: bold;
 }
 
-span:hover {
-  text-decoration: underline;
+/* THEME SWITCH (INLINE) */
+.theme-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-inline input {
+  display: none;
+}
+
+.theme-inline label {
+  width: 42px;
+  height: 22px;
+  background: #222;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.theme-inline label::after {
+  content: "🌙";
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease;
+}
+
+.theme-inline input:checked + label {
+  background: #ddd;
+}
+
+.theme-inline input:checked + label::after {
+  content: "☀️";
+  transform: translateX(20px);
+}
+
+/* LIGHT THEME */
+body.light {
+  background: radial-gradient(circle at top, #ffffff, #eaeaea);
+  color: #111;
+}
+
+body.light .panel-left {
+  background: linear-gradient(135deg, #6fdcff, #e6f7ff);
+}
+
+body.light .panel-right {
+  background: rgba(255,255,255,0.9);
+}
+
+body.light input {
+  color: #000;
+  border-bottom-color: #0077aa66;
+}
+
+body.light button {
+  background: linear-gradient(135deg, #0077ff, #00bcd4);
+  color: white;
+}
+
+body.light span {
+  color: #0077aa;
 }
 </style>
 </head>
@@ -170,7 +213,7 @@ span:hover {
 <div class="scene">
   <div class="card" id="card">
 
-    <!-- FRONT (LOGIN) -->
+    <!-- LOGIN -->
     <div class="side front">
       <div class="panel-left">
         <h1>WELCOME BACK!</h1>
@@ -181,12 +224,20 @@ span:hover {
           <input type="text" placeholder="Username">
           <input type="password" placeholder="Password">
           <button type="button">Login</button>
-          <p>Don't have an account? <span id="toRegister">Sign Up</span></p>
+
+          <div class="form-footer">
+            <span id="toRegister">Sign Up</span>
+
+            <div class="theme-inline">
+              <input type="checkbox" id="themeSwitch">
+              <label for="themeSwitch"></label>
+            </div>
+          </div>
         </form>
       </div>
     </div>
 
-    <!-- BACK (REGISTER) -->
+    <!-- REGISTER -->
     <div class="side back">
       <div class="panel-left">
         <h1>HELLO FRIEND!</h1>
@@ -198,7 +249,15 @@ span:hover {
           <input type="email" placeholder="Email">
           <input type="password" placeholder="Password">
           <button type="button">Register</button>
-          <p>Already have an account? <span id="toLogin">Sign In</span></p>
+
+          <div class="form-footer">
+            <span id="toLogin">Sign In</span>
+
+            <div class="theme-inline">
+              <input type="checkbox" id="themeSwitch2">
+              <label for="themeSwitch2"></label>
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -208,14 +267,28 @@ span:hover {
 
 <script>
 const card = document.getElementById("card");
+const switch1 = document.getElementById("themeSwitch");
+const switch2 = document.getElementById("themeSwitch2");
 
-document.getElementById("toRegister").onclick = () => {
-  card.classList.add("flipped");
-};
+document.getElementById("toRegister").onclick = () => card.classList.add("flipped");
+document.getElementById("toLogin").onclick = () => card.classList.remove("flipped");
 
-document.getElementById("toLogin").onclick = () => {
-  card.classList.remove("flipped");
-};
+// Sync both switches
+function setTheme(isLight) {
+  document.body.classList.toggle("light", isLight);
+  switch1.checked = isLight;
+  switch2.checked = isLight;
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+}
+
+[switch1, switch2].forEach(sw => {
+  sw.addEventListener("change", () => setTheme(sw.checked));
+});
+
+// Load saved theme
+if (localStorage.getItem("theme") === "light") {
+  setTheme(true);
+}
 </script>
 
 </body>
